@@ -27,6 +27,12 @@ class User extends BaseUser
 	 * @ORM\JoinColumn(name="ticket_id", referencedColumnName="id")
 	 */
 	private $ticket;
+	
+	/**
+	 * @ORM\OneToMany(targetEntity="TicketBundle\Entity\Message", mappedBy="user")
+	 * @ORM\JoinColumn(name="message_id", referencedColumnName="id")
+	 */
+	private $message;
 
     /**
      * Get id
@@ -53,7 +59,22 @@ class User extends BaseUser
 	{
 		$this->ticket = $ticket;
 	}
- 
+	
+	/**
+	 * @return mixed
+	 */
+	public function getMessage()
+	{
+		return $this->message;
+	}
+	
+	/**
+	 * @param mixed $message
+	 */
+	public function setMessage($message)
+	{
+		$this->message = $message;
+	}
  
 }
 

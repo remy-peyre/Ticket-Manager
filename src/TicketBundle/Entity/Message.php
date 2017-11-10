@@ -20,13 +20,11 @@ class Message
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="author", type="string", length=255)
-     */
-    private $author;
+	
+	/**
+	 * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+	 */
+	private $user;
 
     /**
      * @var \DateTime
@@ -47,8 +45,7 @@ class Message
 	 * @ORM\JoinColumn(name="ticket_id", referencedColumnName="id")
 	 */
 	private $ticket;
-
-
+	
     /**
      * Get id
      *
@@ -58,30 +55,22 @@ class Message
     {
         return $this->id;
     }
-
-    /**
-     * Set author
-     *
-     * @param string $author
-     *
-     * @return Message
-     */
-    public function setAuthor($author)
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
-    /**
-     * Get author
-     *
-     * @return string
-     */
-    public function getAuthor()
-    {
-        return $this->author;
-    }
+	
+	/**
+	 * @return mixed
+	 */
+	public function getUser()
+	{
+		return $this->user;
+	}
+	
+	/**
+	 * @param mixed $user
+	 */
+	public function setUser($user)
+	{
+		$this->user = $user;
+	}
 
     /**
      * Set createdAt
