@@ -21,7 +21,12 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-
+	
+	/**
+	 * @ORM\OneToMany(targetEntity="TicketBundle\Entity\Ticket", mappedBy="user")
+	 * @ORM\JoinColumn(name="ticket_id", referencedColumnName="id")
+	 */
+	private $ticket;
 
     /**
      * Get id
@@ -32,5 +37,23 @@ class User extends BaseUser
     {
         return $this->id;
     }
+	
+	/**
+	 * @return mixed
+	 */
+	public function getTicket()
+	{
+		return $this->ticket;
+	}
+	
+	/**
+	 * @param mixed $ticket
+	 */
+	public function setTicket($ticket)
+	{
+		$this->ticket = $ticket;
+	}
+ 
+ 
 }
 

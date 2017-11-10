@@ -22,11 +22,9 @@ class Ticket
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="username", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
      */
-    private $username;
+    private $user;
 
     /**
      * @var \DateTime
@@ -56,31 +54,23 @@ class Ticket
     {
         return $this->id;
     }
-
-    /**
-     * Set username
-     *
-     * @param string $username
-     *
-     * @return Ticket
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
-    /**
-     * Get username
-     *
-     * @return string
-     */
-    public function getUsername()
-    {
-        return $this->username;
-    }
-
+	
+	/**
+	 * @return mixed
+	 */
+	public function getUser()
+	{
+		return $this->user;
+	}
+	
+	/**
+	 * @param mixed $user
+	 */
+	public function setUser($user)
+	{
+		$this->user = $user;
+	}
+    
     /**
      * Set createdAt
      *
