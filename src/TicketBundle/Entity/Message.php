@@ -5,12 +5,12 @@ namespace TicketBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Ticket
+ * Message
  *
- * @ORM\Table(name="ticket")
- * @ORM\Entity(repositoryClass="TicketBundle\Repository\TicketRepository")
+ * @ORM\Table(name="message")
+ * @ORM\Entity(repositoryClass="TicketBundle\Repository\MessageRepository")
  */
-class Ticket
+class Message
 {
     /**
      * @var int
@@ -24,9 +24,9 @@ class Ticket
     /**
      * @var string
      *
-     * @ORM\Column(name="username", type="string", length=255)
+     * @ORM\Column(name="author", type="string", length=255)
      */
-    private $username;
+    private $author;
 
     /**
      * @var \DateTime
@@ -38,14 +38,16 @@ class Ticket
     /**
      * @var string
      *
-     * @ORM\Column(name="subject", type="string", length=255)
+     * @ORM\Column(name="content", type="text")
      */
-    private $subject;
+    private $content;
 	
 	/**
-	 * @ORM\ManyToOne(targetEntity="Message")
+	 * @ORM\OneToMany(targetEntity="Ticket", mappedBy="message")
+	 * @ORM\JoinColumn(name="ticket_id", referencedColumnName="id")
 	 */
-	private $message;
+	private $ticket;
+
 
     /**
      * Get id
@@ -58,27 +60,27 @@ class Ticket
     }
 
     /**
-     * Set username
+     * Set author
      *
-     * @param string $username
+     * @param string $author
      *
-     * @return Ticket
+     * @return Message
      */
-    public function setUsername($username)
+    public function setAuthor($author)
     {
-        $this->username = $username;
+        $this->author = $author;
 
         return $this;
     }
 
     /**
-     * Get username
+     * Get author
      *
      * @return string
      */
-    public function getUsername()
+    public function getAuthor()
     {
-        return $this->username;
+        return $this->author;
     }
 
     /**
@@ -86,7 +88,7 @@ class Ticket
      *
      * @param \DateTime $createdAt
      *
-     * @return Ticket
+     * @return Message
      */
     public function setCreatedAt($createdAt)
     {
@@ -104,45 +106,45 @@ class Ticket
     {
         return $this->createdAt;
     }
-	
+
     /**
-     * Set subject
+     * Set content
      *
-     * @param string $subject
+     * @param string $content
      *
-     * @return Ticket
+     * @return Message
      */
-    public function setSubject($subject)
+    public function setContent($content)
     {
-        $this->subject = $subject;
+        $this->content = $content;
 
         return $this;
     }
 
     /**
-     * Get subject
+     * Get content
      *
      * @return string
      */
-    public function getSubject()
+    public function getContent()
     {
-        return $this->subject;
+        return $this->content;
     }
 	
 	/**
 	 * @return mixed
 	 */
-	public function getMessage()
+	public function getTicket()
 	{
-		return $this->message;
+		return $this->ticket;
 	}
 	
 	/**
-	 * @param mixed $message
+	 * @param mixed $ticket
 	 */
-	public function setMessage($message)
+	public function setTicket($ticket)
 	{
-		$this->message = $message;
+		$this->ticket = $ticket;
 	}
  
  
