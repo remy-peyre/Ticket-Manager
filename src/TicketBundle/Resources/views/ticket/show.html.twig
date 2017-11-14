@@ -1,0 +1,28 @@
+{% extends 'TicketBundle:Default:layout.html.twig' %}
+
+{% block main %}
+    <h1>Ticket</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ticket.id }}</td>
+            </tr>
+            <tr>
+                <th>Createdat</th>
+                <td>{% if ticket.createdAt %}{{ ticket.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Subject</th>
+                <td>{{ ticket.subject }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('ticket_index') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}
