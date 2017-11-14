@@ -1,3 +1,7 @@
+ticket_ticket:
+    resource: "@TicketBundle/Controller/TicketController.php"
+    type:     annotation
+
 user:
     resource: "@UserBundle/Controller/"
     type:     annotation

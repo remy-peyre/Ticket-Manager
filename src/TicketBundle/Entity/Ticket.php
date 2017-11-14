@@ -22,7 +22,7 @@ class Ticket
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="ticket")
      */
     private $user;
 
@@ -41,7 +41,7 @@ class Ticket
     private $subject;
 	
 	/**
-	 * @ORM\ManyToOne(targetEntity="Message")
+	 * @ORM\ManyToOne(targetEntity="Message", inversedBy="ticket")
 	 */
 	private $message;
 
