@@ -86,13 +86,15 @@ class TicketController extends Controller
 		
 		// remove all messages before removing ticket
 		$messages = $em->getRepository('TicketBundle:Message')->findBy(['ticket' => $id]);
-		foreach ($messages as $msg) {
-			$em->remove($msg);
+		if (null !== $messages) {
+			foreach ($messages as $msg) {
+				$em->remove($msg);
+			}
 		}
 		
 		$em->remove($ticket);
 		$em->flush();
 		
-		return $this->redirectToRoute('message_index');
+		return $this->redirectToRoute('ticket_index');
 	}
 }
