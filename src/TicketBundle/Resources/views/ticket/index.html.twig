@@ -8,6 +8,9 @@
                 <th>Id</th>
                 <th>Created at</th>
                 <th>Subject</th>
+                {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ADMIN') %}
+                    <th>User</th>
+                {% endif %}
                 <th>Actions</th>
             </tr>
         </thead>
@@ -26,6 +29,9 @@
                             {% endif %}
                         </td>
                         <td>{{ ticket.subject }}</td>
+	                    {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ADMIN') %}
+                            <td>{{ ticket.user.username }}</td>
+                        {% endif %}
                         <td>
                             <ul>
                                 <li>

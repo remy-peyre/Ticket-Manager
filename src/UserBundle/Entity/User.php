@@ -26,7 +26,7 @@ class User extends BaseUser
 	 * @ORM\OneToMany(targetEntity="TicketBundle\Entity\Ticket", mappedBy="user")
 	 * @ORM\JoinColumn(name="ticket_id", referencedColumnName="id")
 	 */
-	private $ticket;
+	private $tickets;
 	
 	/**
 	 * @ORM\OneToMany(targetEntity="TicketBundle\Entity\Message", mappedBy="user")
@@ -47,17 +47,17 @@ class User extends BaseUser
 	/**
 	 * @return mixed
 	 */
-	public function getTicket()
+	public function getTickets()
 	{
-		return $this->ticket;
+		return $this->tickets;
 	}
 	
 	/**
-	 * @param mixed $ticket
+	 * @param mixed $tickets
 	 */
-	public function setTicket($ticket)
+	public function setTickets($tickets)
 	{
-		$this->ticket = $ticket;
+		$this->tickets = $tickets;
 	}
 	
 	/**

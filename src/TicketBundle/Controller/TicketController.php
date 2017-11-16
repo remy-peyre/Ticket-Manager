@@ -25,7 +25,13 @@ class TicketController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $tickets = $em->getRepository('TicketBundle:Ticket')->findAll();
+	
+	    $role = $this->getUser()->getRoles();
+	    if ($role[0] == 'ROLE_SUPER_ADMIN' || $role[0] == 'ROLE_ADMIN') {
+		    $tickets = $em->getRepository('TicketBundle:Ticket')->findAll();
+	    } else {
+		    $tickets = $this->getUser()->getTickets();
+	    }
 
         return $this->render('TicketBundle:ticket:index.html.twig', array(
             'tickets' => $tickets,
