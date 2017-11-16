@@ -45,7 +45,18 @@
 						</td>
 						<td>{{ message.content }}</td>
 						<td>
-							<a href="{{ path('message_show', { 'id': message.id }) }}">show</a>
+							<ul>
+								<li>
+									<a href="{{ path('message_show', { 'id': message.id }) }}">
+										show
+									</a>
+								</li>
+								<li>
+									<a href="{{ path('message_delete', { 'id': message.id }) }}">
+										delete
+									</a>
+								</li>
+							</ul>
 						</td>
 					</tr>
 				{% endfor %}

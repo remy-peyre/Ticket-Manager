@@ -76,4 +76,23 @@ class TicketController extends Controller
 		    'form' => $form->createView(),
 	    ]);
     }
+	
+	/**
+	 * @Route("/delete-{id}", name="ticket_delete")
+	 */
+	public function deleteAction(Request $request, $id) {
+		$em = $this->getDoctrine()->getManager();
+		$ticket = $em->getRepository('TicketBundle:Ticket')->find($id);
+		
+		// remove all messages before removing ticket
+		$messages = $em->getRepository('TicketBundle:Message')->findBy(['ticket' => $id]);
+		foreach ($messages as $msg) {
+			$em->remove($msg);
+		}
+		
+		$em->remove($ticket);
+		$em->flush();
+		
+		return $this->redirectToRoute('message_index');
+	}
 }

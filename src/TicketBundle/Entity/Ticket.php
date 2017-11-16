@@ -124,17 +124,17 @@ class Ticket
 	/**
 	 * @return mixed
 	 */
-	public function getMessage()
+	public function getMessages()
 	{
-		return $this->message;
+		return $this->messages;
 	}
 	
 	/**
-	 * @param mixed $message
+	 * @param mixed $messages
 	 */
-	public function setMessage($message)
+	public function setMessages($messages)
 	{
-		$this->message = $message;
+		$this->messages = $messages;
 	}
  
  

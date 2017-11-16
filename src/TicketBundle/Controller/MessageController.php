@@ -26,7 +26,6 @@ class MessageController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
         $messages = $em->getRepository('TicketBundle:Message')->findAll();
 
         return $this->render('TicketBundle:message:index.html.twig', array(
@@ -42,7 +41,6 @@ class MessageController extends Controller
      */
     public function showAction(Message $message)
     {
-
         return $this->render('TicketBundle:message:show.html.twig', array(
             'message' => $message,
         ));
@@ -68,11 +66,24 @@ class MessageController extends Controller
             $em->persist($message);
             $em->flush();
 
-            return $this->redirectToRoute('messages_index');
+            return $this->redirectToRoute('message_index');
         }
 
         return $this->render('TicketBundle:message:create_message.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+	
+	/**
+	 * @Route("/delete-{id}", name="message_delete")
+	 */
+    public function deleteAction(Request $request, $id) {
+	    $em = $this->getDoctrine()->getManager();
+	    $message = $em->getRepository('TicketBundle:Message')->find($id);
+	
+	    $em->remove($message);
+	    $em->flush();
+	
+	    return $this->redirectToRoute('message_index');
     }
 }
