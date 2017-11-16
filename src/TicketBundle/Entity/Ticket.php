@@ -3,6 +3,7 @@
 namespace TicketBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Ticket
@@ -41,11 +42,12 @@ class Ticket
     private $subject;
 	
 	/**
-	 * @ORM\ManyToOne(targetEntity="Message", inversedBy="ticket")
+	 * @ORM\OneToMany(targetEntity="Message", mappedBy="ticket")
 	 */
-	private $message;
-
-    /**
+	private $messages;
+	
+	
+	/**
      * Get id
      *
      * @return int

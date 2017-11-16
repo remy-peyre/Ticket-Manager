@@ -2,33 +2,44 @@
 
 {% block main %}
     <h1>Tickets list</h1>
-
     <table>
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Createdat</th>
+                <th>Created at</th>
                 <th>Subject</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-        {# {% for ticket in tickets %}
-            <tr>
-                <td><a href="{{ path('ticket_show', { 'id': ticket.id }) }}">{{ ticket.id }}</a></td>
-                <td>{% if ticket.createdAt %}{{ ticket.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ ticket.subject }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('ticket_show', { 'id': ticket.id }) }}">show</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %} #}
+            {% if tickets is not null and tickets is not empty %}
+                {% for ticket in tickets %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('ticket_show', { 'id': ticket.id }) }}">
+                                {{ ticket.id }}
+                            </a>
+                        </td>
+                        <td>
+                            {% if ticket.createdAt %}
+                                {{ ticket.createdAt|date('Y-m-d H:i:s') }}
+                            {% endif %}
+                        </td>
+                        <td>{{ ticket.subject }}</td>
+                        <td>
+                            <ul>
+                                <li>
+                                    <a href="{{ path('ticket_show', { 'id': ticket.id }) }}">
+                                        show
+                                    </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <p>There is no ticket to display. Please create one!</p>
+            {% endif %}
         </tbody>
     </table>
-
-    
 {% endblock %}

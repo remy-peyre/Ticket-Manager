@@ -1,34 +1,49 @@
 {% extends 'TicketBundle:Default:layout.html.twig' %}
 
 {% block main %}
-    <h1>Tickets list</h1>
-
+    <h1>Messages list</h1>
     <table>
         <thead>
-        <tr>
-            <th>Id</th>
-            <th>Createdat</th>
-            <th>Subject</th>
-            <th>Actions</th>
-        </tr>
+            <tr>
+                <th>Id</th>
+                <th>Created at</th>
+                <th>Content</th>
+                <th>Ticket</th>
+                <th>User</th>
+                <th>Actions</th>
+            </tr>
         </thead>
         <tbody>
-        {# {% for ticket in tickets %}
-            <tr>
-                <td><a href="{{ path('ticket_show', { 'id': ticket.id }) }}">{{ ticket.id }}</a></td>
-                <td>{% if ticket.createdAt %}{{ ticket.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ ticket.subject }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('ticket_show', { 'id': ticket.id }) }}">show</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %} #}
+            {% for message in messages %}
+                <tr>
+                    <td>
+                        <a href="{{ path('message_show', { 'id': message.id }) }}">
+                            {{ message.id }}
+                        </a>
+                    </td>
+                    <td>
+                        {% if message.createdAt %}
+                            {{ message.createdAt|date('Y-m-d H:i:s') }}
+                        {% endif %}
+                    </td>
+                    <td>{{ message.content }}</td>
+                    <td>
+	                    {% if message.ticket is not null %}
+                            {{ message.ticket.subject }}
+	                    {% endif %}
+                    </td>
+                    <td>{{ message.user.username }}</td>
+                    <td>
+                        <ul>
+                            <li>
+                                <a href="{{ path('message_show', { 'id': message.id }) }}">
+                                    show
+                                </a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
-
-
 {% endblock %}

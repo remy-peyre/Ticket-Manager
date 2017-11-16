@@ -68,7 +68,7 @@ class MessageController extends Controller
             $em->persist($data);
             $em->flush();
 
-            return $this->redirectToRoute('message_index');
+            return $this->redirectToRoute('ticket_index');
         }
 
         return $this->render('TicketBundle:message:create_message.html.twig', [

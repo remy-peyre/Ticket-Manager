@@ -41,7 +41,7 @@ class Message
     private $content;
 	
 	/**
-	 * @ORM\OneToMany(targetEntity="Ticket", mappedBy="message")
+	 * @ORM\ManyToOne(targetEntity="Ticket", inversedBy="messages")
 	 * @ORM\JoinColumn(name="ticket_id", referencedColumnName="id")
 	 */
 	private $ticket;

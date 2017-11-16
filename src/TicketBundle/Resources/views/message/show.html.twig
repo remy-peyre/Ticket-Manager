@@ -2,7 +2,6 @@
 
 {% block body %}
     <h1>Message</h1>
-
     <table>
         <tbody>
             <tr>
@@ -10,8 +9,11 @@
                 <td>{{ message.id }}</td>
             </tr>
             <tr>
-                <th>Createdat</th>
-                <td>{% if message.createdAt %}{{ message.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <th>Created at</th>
+                <td>{% if message.createdAt %}
+                        {{ message.createdAt|date('Y-m-d H:i:s') }}
+                    {% endif %}
+                </td>
             </tr>
             <tr>
                 <th>Content</th>
@@ -19,7 +21,6 @@
             </tr>
         </tbody>
     </table>
-
     <ul>
         <li>
             <a href="{{ path('message_index') }}">Back to the list</a>

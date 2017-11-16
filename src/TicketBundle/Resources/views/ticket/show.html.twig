@@ -1,8 +1,7 @@
 {% extends 'TicketBundle:Default:layout.html.twig' %}
 
 {% block main %}
-    <h1>Ticket</h1>
-
+    <h1>Ticket {{ ticket.subject }}</h1>
     <table>
         <tbody>
             <tr>
@@ -10,8 +9,12 @@
                 <td>{{ ticket.id }}</td>
             </tr>
             <tr>
-                <th>Createdat</th>
-                <td>{% if ticket.createdAt %}{{ ticket.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <th>Created at</th>
+                <td>
+                    {% if ticket.createdAt %}
+                        {{ ticket.createdAt|date('Y-m-d H:i:s') }}
+                    {% endif %}
+                </td>
             </tr>
             <tr>
                 <th>Subject</th>
@@ -19,7 +22,39 @@
             </tr>
         </tbody>
     </table>
-
+	
+	<h1>Messages</h1>
+	<table>
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Created at</th>
+				<th>Subject</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% if messages is not null and messages is not empty %}
+				{% for message in messages %}
+					<tr>
+						<td>{{ message.id }}</td>
+						<td>
+							{% if message.createdAt %}
+								{{ message.createdAt|date('Y-m-d H:i:s') }}
+							{% endif %}
+						</td>
+						<td>{{ message.content }}</td>
+						<td>
+							<a href="{{ path('message_show', { 'id': message.id }) }}">show</a>
+						</td>
+					</tr>
+				{% endfor %}
+			{% else %}
+				<p>There is no message to display. Please write one!</p>
+			{% endif %}
+		</tbody>
+	</table>
+	
     <ul>
         <li>
             <a href="{{ path('ticket_index') }}">Back to the list</a>

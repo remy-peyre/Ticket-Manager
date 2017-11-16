@@ -25,7 +25,6 @@ class TicketController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
         $tickets = $em->getRepository('TicketBundle:Ticket')->findAll();
 
         return $this->render('TicketBundle:ticket:index.html.twig', array(
@@ -39,10 +38,14 @@ class TicketController extends Controller
 	 * @Route("/show-{id}", name="ticket_show")
 	 * @Method("GET")
 	 */
-	public function showAction(Ticket $ticket)
+	public function showAction(Ticket $ticket, $id)
 	{
+		$em = $this->getDoctrine()->getManager();
+		$messages = $em->getRepository('TicketBundle:Message')->findBy(['ticket' => $id]);
+		
 		return $this->render('TicketBundle:ticket:show.html.twig', array(
 			'ticket' => $ticket,
+			'messages' => $messages
 		));
 	}
 	
