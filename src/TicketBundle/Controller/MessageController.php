@@ -18,22 +18,6 @@ use Symfony\Component\HttpFoundation\Request;
 class MessageController extends Controller
 {
     /**
-     * Lists all message entities.
-     *
-     * @Route("/", name="message_index")
-     * @Method("GET")
-     */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-        $messages = $em->getRepository('TicketBundle:Message')->findAll();
-
-        return $this->render('TicketBundle:message:index.html.twig', array(
-            'messages' => $messages,
-        ));
-    }
-
-    /**
      * Finds and displays a message entity.
      *
      * @Route("/show-{id}", name="message_show")
@@ -66,7 +50,7 @@ class MessageController extends Controller
             $em->persist($message);
             $em->flush();
 
-            return $this->redirectToRoute('message_index');
+            return $this->redirectToRoute('ticket_index');
         }
 
         return $this->render('TicketBundle:message:create_message.html.twig', [
@@ -84,6 +68,6 @@ class MessageController extends Controller
 	    $em->remove($message);
 	    $em->flush();
 	
-	    return $this->redirectToRoute('message_index');
+	    return $this->redirectToRoute('ticket_index');
     }
 }
