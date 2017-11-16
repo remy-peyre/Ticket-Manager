@@ -51,24 +51,24 @@ class MessageController extends Controller
     /**
      * @Route("/create", name="message_create")
      */
-    public function createAction(Request $request) {
-        $form = $this->createForm(MessageType::class, new Message());
-        $form->handleRequest($request);
-
-        $user = $this->container->get('security.token_storage')->getToken()->getUser();
-        $date = date('Y-m-d H:i:s');
+    public function createAction(Request $request)
+    {
+	    $user = $this->container->get('security.token_storage')->getToken()->getUser();
+	    $date = date('Y-m-d H:i:s');
+	    
+        $message = new Message();
+	    $message->setCreatedAt(new \DateTime($date));
+	    $message->setUser($user);
+	    
+	    $form = $this->createForm(MessageType::class, $message);
+	    $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-
             $em = $this->getDoctrine()->getManager();
-            $data->setCreatedAt(new \DateTime($date));
-            $data->setUser($user);
-
-            $em->persist($data);
+            $em->persist($message);
             $em->flush();
 
-            return $this->redirectToRoute('ticket_index');
+            return $this->redirectToRoute('messages_index');
         }
 
         return $this->render('TicketBundle:message:create_message.html.twig', [

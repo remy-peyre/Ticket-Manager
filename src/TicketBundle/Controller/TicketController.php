@@ -52,21 +52,21 @@ class TicketController extends Controller
 	/**
 	 * @Route("/create", name="ticket_create")
 	 */
-    public function createAction(Request $request) {
-	    $form = $this->createForm(TicketType::class, new Ticket());
-	    $form->handleRequest($request);
-	
+    public function createAction(Request $request)
+    {
 	    $user = $this->container->get('security.token_storage')->getToken()->getUser();
 	    $date = date('Y-m-d H:i:s');
+	    
+    	$ticket = new Ticket();
+	    $ticket->setCreatedAt(new \DateTime($date));
+	    $ticket->setUser($user);
+	    
+	    $form = $this->createForm(TicketType::class, $ticket);
+	    $form->handleRequest($request);
 	
 	    if ($form->isSubmitted() && $form->isValid()) {
-		    $data = $form->getData();
-		
 		    $em = $this->getDoctrine()->getManager();
-		    $data->setCreatedAt(new \DateTime($date));
-		    $data->setUser($user);
-		    
-		    $em->persist($data);
+		    $em->persist($ticket);
 		    $em->flush();
 		    
 		    return $this->redirectToRoute('ticket_index');
