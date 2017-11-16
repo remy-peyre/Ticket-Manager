@@ -33,11 +33,13 @@
                                         show
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="{{ path('ticket_delete', { 'id': ticket.id }) }}">
-                                        delete
-                                    </a>
-                                </li>
+                                {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ADMIN') %}
+                                    <li>
+                                        <a href="{{ path('ticket_delete', { 'id': ticket.id }) }}">
+                                            delete
+                                        </a>
+                                    </li>
+                                {% endif %}
                             </ul>
                         </td>
                     </tr>
