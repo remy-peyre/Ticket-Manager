@@ -61,7 +61,8 @@ class MessageController extends Controller
 	/**
 	 * @Route("/delete-{id}", name="message_delete")
 	 */
-    public function deleteAction(Request $request, $id) {
+    public function deleteAction(Request $request, $id)
+    {
 	    $em = $this->getDoctrine()->getManager();
 	    $message = $em->getRepository('TicketBundle:Message')->find($id);
 	
@@ -69,5 +70,31 @@ class MessageController extends Controller
 	    $em->flush();
 	
 	    return $this->redirectToRoute('ticket_index');
+    }
+
+    /**
+     * @Route("/update-{id}", name="message_update")
+     */
+    public function updateAction(Request $request, $id)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $message = $em->getRepository('TicketBundle:Message')->find($id);
+
+        $form = $this->createForm(MessageType::class, $message);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->setContent($form);
+            $em->flush();
+
+            return $this->redirectToRoute('ticket_index');
+        }
+
+        return $this->render('TicketBundle:message:update.html.twig', [
+            'message' => $message,
+            'form' => $form->createView(),
+        ]);
     }
 }
