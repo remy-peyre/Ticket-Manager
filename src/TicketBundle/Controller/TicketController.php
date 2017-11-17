@@ -47,11 +47,11 @@ class TicketController extends Controller
 	public function showAction(Ticket $ticket, $id)
 	{
 		$em = $this->getDoctrine()->getManager();
-		$messages = $em->getRepository('TicketBundle:Message')->findBy(['ticket' => $id]);
+		//$messages = $em->getRepository('TicketBundle:Message')->findBy(['ticket' => $id]);
 		
 		return $this->render('TicketBundle:ticket:show.html.twig', array(
 			'ticket' => $ticket,
-			'messages' => $messages
+			//'messages' => $messages
 		));
 	}
 	
@@ -103,4 +103,30 @@ class TicketController extends Controller
 		
 		return $this->redirectToRoute('ticket_index');
 	}
+
+    /**
+     * @Route("/update-{id}", name="ticket_update")
+     */
+    public function updateAction(Request $request, $id)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $ticket = $em->getRepository('TicketBundle:Ticket')->find($id);
+
+        $form = $this->createForm(TicketType::class, $ticket);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $ticket->setSubject($form->getData()->getSubject());
+            $em->flush();
+
+            return $this->redirectToRoute('ticket_index');
+        }
+
+        return $this->render('TicketBundle:ticket:update.html.twig', [
+            'ticket' => $ticket,
+            'form' => $form->createView(),
+        ]);
+
+    }
 }

@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ form_start(form) }}
+    {{ form_row(form.subject, {'value': ticket.subject}) }}
+    <button>Change ticket</button>
+    {{ form_end(form) }}
+{% endblock %}

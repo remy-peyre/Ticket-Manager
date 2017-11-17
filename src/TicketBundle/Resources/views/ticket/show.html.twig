@@ -20,6 +20,23 @@
                 <th>Subject</th>
                 <td>{{ ticket.subject }}</td>
             </tr>
+            {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ADMIN') %}
+			<tr>
+				<th>Actions</th>
+				<td>
+					<li>
+						<a href="{{ path('ticket_update', { 'id': ticket.id }) }}">
+							update
+						</a>
+					</li>
+					<li>
+						<a href="{{ path('ticket_delete', { 'id': ticket.id }) }}">
+							delete
+						</a>
+					</li>
+				</td>
+			</tr>
+            {% endif %}
         </tbody>
     </table>
 	
@@ -34,8 +51,8 @@
 			</tr>
 		</thead>
 		<tbody>
-			{% if messages is not null and messages is not empty %}
-				{% for message in messages %}
+			{% if ticket.messages is not null and ticket.messages is not empty %}
+				{% for message in ticket.messages %}
 					<tr>
 						<td>{{ message.id }}</td>
 						<td>

@@ -77,16 +77,14 @@ class MessageController extends Controller
      */
     public function updateAction(Request $request, $id)
     {
-
         $em = $this->getDoctrine()->getManager();
         $message = $em->getRepository('TicketBundle:Message')->find($id);
 
-        $form = $this->createForm(MessageType::class, $message);
+        $form = $this->createForm(MessageType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->setContent($form);
+            $message->setContent($form->getData()->getContent());
             $em->flush();
 
             return $this->redirectToRoute('ticket_index');
