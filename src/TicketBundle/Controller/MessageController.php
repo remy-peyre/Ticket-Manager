@@ -46,11 +46,13 @@ class MessageController extends Controller
 	    $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+        	$idTicket = $form->getData()->getTicket()->getId();
+        	
             $em = $this->getDoctrine()->getManager();
             $em->persist($message);
             $em->flush();
 
-            return $this->redirectToRoute('ticket_index');
+            return $this->redirectToRoute('ticket_show', ['id' => $idTicket]);
         }
 
         return $this->render('TicketBundle:message:create_message.html.twig', [

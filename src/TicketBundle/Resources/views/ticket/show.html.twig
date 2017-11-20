@@ -41,17 +41,20 @@
     </table>
 	
 	<h1>Messages</h1>
-	<table>
-		<thead>
-			<tr>
-				<th>Id</th>
-				<th>Created at</th>
-				<th>Subject</th>
-				<th>Actions</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% if ticket.messages is not null and ticket.messages is not empty %}
+	<a href="{{ path('message_create') }}">
+		<button>Créer un message</button>
+	</a>
+	{% if ticket.messages is not null and ticket.messages is not empty %}
+		<table>
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Created at</th>
+					<th>Subject</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
 				{% for message in ticket.messages %}
 					<tr>
 						<td>{{ message.id }}</td>
@@ -68,7 +71,7 @@
 										show
 									</a>
 								</li>
-
+	
 								{% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ADMIN') %}
 									<li>
 										<a href="{{ path('message_update', { 'id': message.id }) }}">
@@ -85,13 +88,12 @@
 						</td>
 					</tr>
 				{% endfor %}
-			{% else %}
-				<p>There is no message to display. Please write one!</p>
-			{% endif %}
-		</tbody>
-	</table>
-	
-    <ul>
+			</tbody>
+		</table>
+	{% else %}
+		<p>There is no message to display. Please write one!</p>
+	{% endif %}
+	<ul>
         <li>
             <a href="{{ path('ticket_index') }}">Back to the list</a>
         </li>
