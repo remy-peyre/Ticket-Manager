@@ -1,6 +1,6 @@
 {% extends 'TicketBundle:Default:layout.html.twig' %}
 
-{% block body %}
+{% block main %}
     {{ form_start(form) }}
         {{ form_row(form.content, {'value': message.content}) }}
         {{ form_row(form.ticket, {'attr': {'disabled' : 'disabled'} } ) }}

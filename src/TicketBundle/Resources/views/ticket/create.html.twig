@@ -2,7 +2,14 @@
 
 {% block main %}
 	{{ form_start(form) }}
-		{{ form_widget(form) }}
+    	{{ form_row(form.subject) }}
+		{% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ADMIN') %}
+    		{{ form_row(form.user) }}
+		{% else %}
+			<div class="hidden-row">
+                {{ form_row(form.user, {'label' : false}) }}
+			</div>
+        {% endif %}
 		<button>Add ticket</button>
 	{{ form_end(form) }}
 {% endblock %}

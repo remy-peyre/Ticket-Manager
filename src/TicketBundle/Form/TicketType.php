@@ -7,6 +7,7 @@ use TicketBundle\Entity\Ticket;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class TicketType extends AbstractType
 {
@@ -14,6 +15,10 @@ class TicketType extends AbstractType
 	{
 		$builder
 			->add('subject', TextType::class)
+            ->add('user', EntityType::class, [
+                'class' => 'UserBundle\Entity\User',
+                'choice_label' => 'username'
+            ])
 		;
 	}
 	

@@ -65,7 +65,10 @@ class TicketController extends Controller
 	    
     	$ticket = new Ticket();
 	    $ticket->setCreatedAt(new \DateTime($date));
-	    $ticket->setUser($user);
+	    if ($user->hasRole('ROLE_USER') ){
+            $ticket->setUser($user);
+        }
+
 	    
 	    $form = $this->createForm(TicketType::class, $ticket);
 	    $form->handleRequest($request);
