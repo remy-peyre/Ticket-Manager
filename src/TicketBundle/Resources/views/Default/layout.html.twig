@@ -11,12 +11,19 @@
 </head>
 <body>
 	{% block navbar %}
-		<a href="{{ app.request.getBaseUrl() }}/logout">
-			<button>Déconnexion</button>
-		</a>
+		<div class="container">
+			<a class="pull-right" href="{{ app.request.getBaseUrl() }}/logout">
+				<button class="btn btn-danger">Déconnexion</button>
+			</a>
+		</div>
+
 	{% endblock %}
-	
-	{% block main %}{% endblock %}
+
+	<div class="container">
+        {% block main %}
+        {% endblock %}
+	</div>
+
 	
 	{% block javascripts %}
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
