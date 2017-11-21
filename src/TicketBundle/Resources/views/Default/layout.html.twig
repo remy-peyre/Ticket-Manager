@@ -12,10 +12,21 @@
 </head>
 <body>
 	{% block navbar %}
-		<div class="container">
-			<a class="pull-right" href="{{ app.request.getBaseUrl() }}/logout">
-				<button class="btn btn-danger">Déconnexion</button>
-			</a>
+		<div class="header">
+			<div>
+				<h4 class="title_nav">TicketList</h4>
+			</div>
+			<div class="username">
+				{{ app.user.username }}
+			</div>
+			<div class="nav_right">
+				<a class="link_navbar" href="{{ path('ticket_create') }}">
+					Créer un ticket
+				</a>
+				<a class="link_navbar" href="{{ app.request.getBaseUrl() }}/logout">
+					Déconnexion
+				</a>
+			</div>
 		</div>
 
 	{% endblock %}

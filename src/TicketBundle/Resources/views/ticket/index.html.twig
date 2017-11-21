@@ -1,11 +1,11 @@
 {% extends 'TicketBundle:Default:layout.html.twig' %}
 
 {% block main %}
-    <div style="display: flex; justify-content: space-between;">
-        <h1>Tickets list</h1>
-        <a href="{{ path('ticket_create') }}">
+    <div>
+        <h4>Tickets list</h4>
+        {#<a href="{{ path('ticket_create') }}">
             <button class="btn btn-success" style="margin-top: 22px;">Créer un ticket</button>
-        </a>
+        </a>#}
     </div>
 
     <table>
