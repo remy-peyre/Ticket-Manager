@@ -4,20 +4,20 @@
     <div>
         <h4>Mes tickets</h4>
     </div>
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Créé à</th>
-                <th>Suject</th>
-                {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ADMIN') %}
-                    <th>Auteur</th>
-                {% endif %}
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% if tickets is not null and tickets is not empty %}
+    {% if tickets is not null and tickets is not empty %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Créé à</th>
+                    <th>Sujet</th>
+                    {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ADMIN') %}
+                        <th>Auteur</th>
+                    {% endif %}
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
                 {% for ticket in tickets %}
                     <tr>
                         <td>
@@ -31,7 +31,7 @@
                             {% endif %}
                         </td>
                         <td>{{ ticket.subject }}</td>
-	                    {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ADMIN') %}
+                        {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ADMIN') %}
                             <td>{{ ticket.user.username }}</td>
                         {% endif %}
                         <td>
@@ -57,9 +57,7 @@
                         </td>
                     </tr>
                 {% endfor %}
-            {% else %}
-                <p>There is no ticket to display. Please create one!</p>
-            {% endif %}
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    {% endif %}
 {% endblock %}

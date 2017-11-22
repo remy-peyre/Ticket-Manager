@@ -1,8 +1,14 @@
 {% extends 'TicketBundle:Default:layout.html.twig' %}
 
 {% block main %}
+    <h1>Modifier le ticket</h1>
     {{ form_start(form) }}
         {{ form_widget(form) }}
-        <button>Change ticket</button>
+        <div class="center">
+            <button class="btn-submit bg-blue btn waves-effect waves-light center" id="_submit" name="_submit">
+                Modifier
+                <i class="material-icons right">edit</i>
+            </button>
+        </div>
     {{ form_end(form) }}
 {% endblock %}

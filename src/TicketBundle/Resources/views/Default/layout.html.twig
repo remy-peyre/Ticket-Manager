@@ -13,24 +13,6 @@
 </head>
 <body>
 	{% block navbar %}
-		<!--<div class="header">
-			<div>
-				<a href="{{ path('ticket_index') }}">
-					<h4 class="title_nav">TicketList</h4>
-				</a>
-			</div>
-			<div class="username">
-				{{ app.user.username }}
-			</div>
-			<div class="nav_right">
-				<a class="link_navbar" href="{{ path('ticket_create') }}">
-					Créer un ticket
-				</a>
-				<a class="link_navbar" href="{{ app.request.getBaseUrl() }}/logout">
-					Déconnexion
-				</a>
-			</div>
-		</div>-->
 		<nav>
 			<div class="nav-wrapper bg-blue">
 				<ul id="nav-mobile" class="left hide-on-med-and-down">
@@ -50,7 +32,7 @@
 					</li>
 					<li>
 						<a href="{{ app.request.getBaseUrl() }}/logout">
-							Déconnexion
+							<i class="material-icons">power_settings_new</i>
 						</a>
 					</li>
 				</ul>

@@ -1,9 +1,14 @@
 {% extends 'TicketBundle:Default:layout.html.twig' %}
 
 {% block main %}
+    <h1>Modifier le message</h1>
     {{ form_start(form) }}
         {{ form_row(form.content, {'value': message.content}) }}
-        {{ form_row(form.ticket, {'attr': {'disabled' : 'disabled'} } ) }}
-        <button>Change message</button>
+        <div class="center">
+            <button class="btn-submit bg-blue btn waves-effect waves-light center" id="_submit" name="_submit">
+                Modifier
+                <i class="material-icons right">edit</i>
+            </button>
+        </div>
     {{ form_end(form) }}
 {% endblock %}
