@@ -12,6 +12,8 @@
         {% if error %}
 			<div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}
+		
+		<h1>Connexion</h1>
 
 		<form action="{{ path("fos_user_security_check") }}" method="post">
             {% if csrf_token %}
@@ -33,7 +35,11 @@
 					<i class="material-icons right">send</i>
 				</button>
 			</div>
+			<div class="right">
+				<a href="{{ app.request.getBaseUrl() }}/register">
+					Pas encore inscrit ?
+				</a>
+			</div>
 		</form>
 	</div>
-
 {% endblock %}
