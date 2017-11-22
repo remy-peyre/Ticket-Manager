@@ -17,18 +17,6 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class MessageController extends Controller
 {
-    /**
-     * Finds and displays a message entity.
-     *
-     * @Route("/show-{id}", name="message_show")
-     * @Method("GET")
-     */
-    public function showAction(Message $message)
-    {
-        return $this->render('TicketBundle:message:show.html.twig', array(
-            'message' => $message,
-        ));
-    }
 
     /**
      * @Route("/create-{ticketId}", name="message_create")

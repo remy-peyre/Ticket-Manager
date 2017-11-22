@@ -70,12 +70,6 @@
 						<td>{{ message.content }}</td>
 						<td>
 							<ul class="container-icons">
-								<li>
-									<a href="{{ path('message_show', { 'id': message.id }) }}">
-										<i class="material-icons icon color-black">remove_red_eye</i>
-									</a>
-								</li>
-	
 								{% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ADMIN') %}
 									<li>
 										<a href="{{ path('message_update', { 'id': message.id }) }}">
