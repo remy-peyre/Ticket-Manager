@@ -13,9 +13,14 @@
             {{ form_widget(form) }}
 		    <div class="center">
 			    <button class="btn-submit bg-blue btn waves-effect waves-light center">
-			        {{ 'registration.submit'|trans }}
+				    {{ 'registration.submit'|trans }}
 				    <i class="material-icons right">send</i>
 			    </button>
+		    </div>
+		    <div class="right">
+			    <a href="{{ app.request.getBaseUrl() }}/login">
+				    Déjà inscrit ?
+			    </a>
 		    </div>
         {{ form_end(form) }}
     </div>
