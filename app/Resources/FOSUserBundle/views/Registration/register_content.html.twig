@@ -11,9 +11,12 @@
     <div class="container">
         {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
             {{ form_widget(form) }}
-            <div>
-                <input type="submit" value="{{ 'registration.submit'|trans }}" />
-            </div>
+		    <div class="center">
+			    <button class="btn-submit bg-blue btn waves-effect waves-light center">
+			        {{ 'registration.submit'|trans }}
+				    <i class="material-icons right">send</i>
+			    </button>
+		    </div>
         {{ form_end(form) }}
     </div>
 {% endblock %}

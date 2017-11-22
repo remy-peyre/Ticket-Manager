@@ -27,7 +27,12 @@
 			<input type="checkbox" id="remember_me" name="_remember_me" value="on" />
 			<label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
 
-			<input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+			<div class="center">
+				<button class="btn-submit bg-blue btn waves-effect waves-light center" id="_submit" name="_submit">
+					{{ 'security.login.submit'|trans }}
+					<i class="material-icons right">send</i>
+				</button>
+			</div>
 		</form>
 	</div>
 
