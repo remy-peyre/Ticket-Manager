@@ -54,7 +54,9 @@
 					<th>Créé à</th>
 					<th>Auteur</th>
 					<th>Sujet</th>
-					<th>Actions</th>
+                    {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ADMIN') %}
+						<th>Actions</th>
+                    {% endif %}
 				</tr>
 			</thead>
 			<tbody>
