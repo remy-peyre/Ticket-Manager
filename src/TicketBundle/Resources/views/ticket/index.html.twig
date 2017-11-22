@@ -2,20 +2,16 @@
 
 {% block main %}
     <div>
-        <h4>Tickets list</h4>
-        {#<a href="{{ path('ticket_create') }}">
-            <button class="btn btn-success" style="margin-top: 22px;">Créer un ticket</button>
-        </a>#}
+        <h4>Mes tickets</h4>
     </div>
-
     <table>
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Created at</th>
-                <th>Subject</th>
+                <th>Créé à</th>
+                <th>Suject</th>
                 {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ADMIN') %}
-                    <th>User</th>
+                    <th>Auteur</th>
                 {% endif %}
                 <th>Actions</th>
             </tr>
@@ -39,21 +35,21 @@
                             <td>{{ ticket.user.username }}</td>
                         {% endif %}
                         <td>
-                            <ul>
+                            <ul class="container-icons">
                                 <li>
                                     <a href="{{ path('ticket_show', { 'id': ticket.id }) }}">
-                                        show
+                                        <i class="material-icons icon color-black">remove_red_eye</i>
                                     </a>
                                 </li>
                                 {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ADMIN') %}
                                     <li>
                                         <a href="{{ path('ticket_update', { 'id': ticket.id }) }}">
-                                            update
+                                            <i class="material-icons icon color-orange">edit</i>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="{{ path('ticket_delete', { 'id': ticket.id }) }}">
-                                            delete
+                                            <i class="material-icons icon color-red">delete</i>
                                         </a>
                                     </li>
                                 {% endif %}

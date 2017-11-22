@@ -7,14 +7,17 @@
 	{% block stylesheets %}
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link rel="stylesheet" href="{{ asset('css/main.css') }}" />
 	{% endblock %}
 </head>
 <body>
 	{% block navbar %}
-		<div class="header">
+		<!--<div class="header">
 			<div>
-				<h4 class="title_nav">TicketList</h4>
+				<a href="{{ path('ticket_index') }}">
+					<h4 class="title_nav">TicketList</h4>
+				</a>
 			</div>
 			<div class="username">
 				{{ app.user.username }}
@@ -27,8 +30,32 @@
 					Déconnexion
 				</a>
 			</div>
-		</div>
-
+		</div>-->
+		<nav>
+			<div class="nav-wrapper bg-blue">
+				<ul id="nav-mobile" class="left hide-on-med-and-down">
+					<li>
+						<i class="material-icons right">account_circle</i>
+					</li>
+					<li class="username">
+						{{ app.user.username }}
+					</li>
+				</ul>
+				<ul class="right hide-on-med-and-down">
+					<li>
+						<a href="{{ path('ticket_index') }}">Mes tickets</a>
+					</li>
+					<li>
+						<a href="{{ path('ticket_create') }}">Créer un ticket</a>
+					</li>
+					<li>
+						<a href="{{ app.request.getBaseUrl() }}/logout">
+							Déconnexion
+						</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
 	{% endblock %}
 
 	<div class="container">

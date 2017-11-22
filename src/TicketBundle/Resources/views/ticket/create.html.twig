@@ -1,6 +1,7 @@
 {% extends 'TicketBundle:Default:layout.html.twig' %}
 
 {% block main %}
+	<h1>Créer un ticket</h1>
 	{{ form_start(form) }}
     	{{ form_row(form.subject) }}
 		{% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ADMIN') %}
@@ -10,6 +11,11 @@
                 {{ form_row(form.user, {'label' : false}) }}
 			</div>
         {% endif %}
-		<button>Add ticket</button>
+		<div class="center">
+			<button class="btn-submit bg-blue btn waves-effect waves-light center">
+				Ajouter le ticket
+				<i class="material-icons right">send</i>
+			</button>
+		</div>
 	{{ form_end(form) }}
 {% endblock %}

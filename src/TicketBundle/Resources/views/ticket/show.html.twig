@@ -6,8 +6,8 @@
         <tbody>
             <thead>
                 <th>Id</th>
-				<th>Created at</th>
-				<th>Subject</th>
+				<th>Créé à</th>
+				<th>Sujet</th>
                 {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ADMIN') %}
 					<th>Actions</th>
                 {% endif %}
@@ -22,33 +22,38 @@
 				<td>{{ ticket.subject }}</td>
                 {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ADMIN') %}
 				<td>
-					<li>
-						<a href="{{ path('ticket_update', { 'id': ticket.id }) }}">
-							update
-						</a>
-					</li>
-					<li>
-						<a href="{{ path('ticket_delete', { 'id': ticket.id }) }}">
-							delete
-						</a>
-					</li>
+					<ul class="container-icons">
+						<li>
+							<a href="{{ path('ticket_update', { 'id': ticket.id }) }}">
+								<i class="material-icons icon color-orange">edit</i>
+							</a>
+						</li>
+						<li>
+							<a href="{{ path('ticket_delete', { 'id': ticket.id }) }}">
+								<i class="material-icons icon color-red">delete</i>
+							</a>
+						</li>
+					</ul>
 				</td>
             {% endif %}
             </tr>
         </tbody>
     </table>
 	
-	<h1>Messages</h1>
-	<a href="{{ path('message_create', {'ticketId': ticket.id}) }}">
-		<button>Créer un message</button>
-	</a>
+	<div class="flex-row">
+		<h1>Messages</h1>
+		<a href="{{ path('message_create', {'ticketId': ticket.id}) }}">
+			<i class="material-icons color-blue medium btn-add-msg">add_box</i>
+		</a>
+	</div>
 	{% if ticket.messages is not null and ticket.messages is not empty %}
 		<table>
 			<thead>
 				<tr>
 					<th>Id</th>
-					<th>Created at</th>
-					<th>Subject</th>
+					<th>Créé à</th>
+					<th>Auteur</th>
+					<th>Sujet</th>
 					<th>Actions</th>
 				</tr>
 			</thead>
@@ -61,24 +66,25 @@
 								{{ message.createdAt|date('Y-m-d H:i:s') }}
 							{% endif %}
 						</td>
+						<td>{{ message.user.username }}</td>
 						<td>{{ message.content }}</td>
 						<td>
-							<ul>
+							<ul class="container-icons">
 								<li>
 									<a href="{{ path('message_show', { 'id': message.id }) }}">
-										show
+										<i class="material-icons icon color-black">remove_red_eye</i>
 									</a>
 								</li>
 	
 								{% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ADMIN') %}
 									<li>
 										<a href="{{ path('message_update', { 'id': message.id }) }}">
-											update
+											<i class="material-icons icon color-orange">edit</i>
 										</a>
 									</li>
 									<li>
 										<a href="{{ path('message_delete', { 'id': message.id }) }}">
-											delete
+											<i class="material-icons icon color-red">delete</i>
 										</a>
 									</li>
 								{% endif %}
@@ -91,9 +97,8 @@
 	{% else %}
 		<p>There is no message to display. Please write one!</p>
 	{% endif %}
-	<ul>
-        <li>
-            <a href="{{ path('ticket_index') }}">Back to the list</a>
-        </li>
-    </ul>
+	<a href="{{ path('ticket_index') }}" class="link-back">
+		<i class="material-icons color-blue">arrow_back</i>
+		Back to the list
+	</a>
 {% endblock %}

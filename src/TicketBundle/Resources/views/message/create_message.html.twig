@@ -1,8 +1,14 @@
 {% extends 'TicketBundle:Default:layout.html.twig' %}
 
 {% block main %}
+    <h1>Créer un message</h1>
     {{ form_start(form) }}
         {{ form_widget(form) }}
-        <button>Add message</button>
+        <div class="center">
+            <button class="btn-submit bg-blue btn waves-effect waves-light center">
+                Ajouter le message
+                <i class="material-icons right">send</i>
+            </button>
+        </div>
     {{ form_end(form) }}
 {% endblock %}
