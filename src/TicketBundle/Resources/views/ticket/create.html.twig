@@ -4,7 +4,7 @@
 	{{ form_start(form) }}
     	{{ form_row(form.subject) }}
 		{% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ADMIN') %}
-    		{{ form_row(form.user) }}
+    		{{ form_row(form.user, { 'attr' : { 'class' : 'select-wrapper'}} ) }}
 		{% else %}
 			<div class="hidden-row">
                 {{ form_row(form.user, {'label' : false}) }}

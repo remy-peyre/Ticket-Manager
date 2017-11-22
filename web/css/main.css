@@ -14,13 +14,15 @@ body{
     display: flex;
     justify-content: flex-end;
 }
-.nav_right
 .link_navbar{
     background-color: rgb(66, 133, 244);
     padding: 7px;
     background-color: white;
     border-radius: 15px;
     margin-right: 5px;
+}
+.link_navbar:hover{
+    text-decoration: none;
 }
 .username{
     font-size: 18px;

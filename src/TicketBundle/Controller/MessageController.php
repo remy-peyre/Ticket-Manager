@@ -47,7 +47,6 @@ class MessageController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
         	$idTicket = $form->getData()->getTicket()->getId();
-        	
             $em = $this->getDoctrine()->getManager();
             $em->persist($message);
             $em->flush();

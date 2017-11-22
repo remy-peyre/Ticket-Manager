@@ -1,28 +1,26 @@
 {% extends 'TicketBundle:Default:layout.html.twig' %}
 
 {% block main %}
-    <h1>Ticket {{ ticket.subject }}</h1>
+    <h1>Sujet : {{ ticket.subject }}</h1>
     <table>
         <tbody>
-            <tr>
+            <thead>
                 <th>Id</th>
-                <td>{{ ticket.id }}</td>
-            </tr>
+				<th>Created at</th>
+				<th>Subject</th>
+                {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ADMIN') %}
+					<th>Actions</th>
+                {% endif %}
+			</thead>
             <tr>
-                <th>Created at</th>
+				<td>{{ ticket.id }}</td>
                 <td>
                     {% if ticket.createdAt %}
                         {{ ticket.createdAt|date('Y-m-d H:i:s') }}
                     {% endif %}
                 </td>
-            </tr>
-            <tr>
-                <th>Subject</th>
-                <td>{{ ticket.subject }}</td>
-            </tr>
-            {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ADMIN') %}
-			<tr>
-				<th>Actions</th>
+				<td>{{ ticket.subject }}</td>
+                {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ADMIN') %}
 				<td>
 					<li>
 						<a href="{{ path('ticket_update', { 'id': ticket.id }) }}">
@@ -35,8 +33,8 @@
 						</a>
 					</li>
 				</td>
-			</tr>
             {% endif %}
+            </tr>
         </tbody>
     </table>
 	
