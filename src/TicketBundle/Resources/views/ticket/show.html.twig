@@ -39,7 +39,7 @@
     </table>
 	
 	<h1>Messages</h1>
-	<a href="{{ path('message_create') }}">
+	<a href="{{ path('message_create', {'ticketId': ticket.id}) }}">
 		<button>Créer un message</button>
 	</a>
 	{% if ticket.messages is not null and ticket.messages is not empty %}

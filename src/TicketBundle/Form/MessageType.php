@@ -15,10 +15,6 @@ class MessageType extends AbstractType
     {
         $builder
             ->add('content', TextType::class)
-	        ->add('ticket', EntityType::class, [
-		        'class' => 'TicketBundle\Entity\Ticket',
-		        'choice_label' => 'subject'
-	        ])
         ;
     }
 
