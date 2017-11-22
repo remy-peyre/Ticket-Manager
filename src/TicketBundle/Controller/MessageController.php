@@ -69,8 +69,11 @@ class MessageController extends Controller
 	    $em = $this->getDoctrine()->getManager();
 	    $message = $em->getRepository('TicketBundle:Message')->find($id);
 	
-	    $em->remove($message);
-	    $em->flush();
+	    $user = $this->container->get('security.token_storage')->getToken()->getUser();
+	    if ($user->hasRole('ROLE_ADMIN') || $user->hasRole('ROLE_SUPER_ADMIN')) {
+		    $em->remove($message);
+		    $em->flush();
+	    }
 	
 	    return $this->redirectToRoute('ticket_index');
     }

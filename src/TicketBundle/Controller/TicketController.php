@@ -65,7 +65,7 @@ class TicketController extends Controller
 	    
     	$ticket = new Ticket();
 	    $ticket->setCreatedAt(new \DateTime($date));
-	    if ($user->hasRole('ROLE_USER') ){
+	    if ($user->hasRole('ROLE_USER')) {
             $ticket->setUser($user);
         }
 
@@ -94,15 +94,17 @@ class TicketController extends Controller
 		$ticket = $em->getRepository('TicketBundle:Ticket')->find($id);
 		
 		// remove all messages before removing ticket
-		$messages = $em->getRepository('TicketBundle:Message')->findBy(['ticket' => $id]);
-		if (null !== $messages) {
-			foreach ($messages as $msg) {
-				$em->remove($msg);
+		$user = $this->container->get('security.token_storage')->getToken()->getUser();
+		if ($user->hasRole('ROLE_ADMIN') || $user->hasRole('ROLE_SUPER_ADMIN')) {
+			$messages = $em->getRepository('TicketBundle:Message')->findBy(['ticket' => $id]);
+			if (null !== $messages) {
+				foreach ($messages as $msg) {
+					$em->remove($msg);
+				}
 			}
+			$em->remove($ticket);
+			$em->flush();
 		}
-		
-		$em->remove($ticket);
-		$em->flush();
 		
 		return $this->redirectToRoute('ticket_index');
 	}
