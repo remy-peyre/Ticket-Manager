@@ -56,6 +56,7 @@ class MessageController extends Controller
     {
 	    $em = $this->getDoctrine()->getManager();
 	    $message = $em->getRepository('TicketBundle:Message')->find($id);
+	    $ticketId = $message->getTicket()->getId();
 	
 	    $user = $this->container->get('security.token_storage')->getToken()->getUser();
 	    if ($user->hasRole('ROLE_ADMIN') || $user->hasRole('ROLE_SUPER_ADMIN')) {
@@ -63,7 +64,7 @@ class MessageController extends Controller
 		    $em->flush();
 	    }
 	
-	    return $this->redirectToRoute('ticket_index');
+	    return $this->redirectToRoute('ticket_show', ['id' => $ticketId]);
     }
 
     /**
@@ -73,6 +74,7 @@ class MessageController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $message = $em->getRepository('TicketBundle:Message')->find($id);
+	    $ticketId = $message->getTicket()->getId();
 
         $form = $this->createForm(MessageType::class);
         $form->handleRequest($request);
@@ -81,7 +83,7 @@ class MessageController extends Controller
             $message->setContent($form->getData()->getContent());
             $em->flush();
 
-            return $this->redirectToRoute('ticket_index');
+            return $this->redirectToRoute('ticket_show', ['id' => $ticketId]);
         }
 
         return $this->render('TicketBundle:message:update.html.twig', [
