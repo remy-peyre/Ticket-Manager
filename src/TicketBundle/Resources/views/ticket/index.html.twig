@@ -3,6 +3,13 @@
 {% block main %}
     <div>
         <h4>Mes tickets</h4>
+        <div class="row_add_ticket">
+            <a href="{{ path('ticket_create') }}">
+                <i class="material-icons color-blue medium btn-add-msg">add_box</i>
+            </a>
+            <h5>Créer un ticket</h5>
+        </div>
+
     </div>
     {% if tickets is not null and tickets is not empty %}
         <table>
