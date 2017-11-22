@@ -1,3 +1,7 @@
+.hidden-row {
+	display: none;
+}
+
 .username {
 	font-size: 20px;
 	color: white;
